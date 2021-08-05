@@ -1,0 +1,27 @@
+{
+  "name": "resource-name",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Your Name",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --mode development --color --progress",
+    "watch": "webpack --mode development --watch"
+  },
+  "dependencies": {
+    "@citizenfx/client": "^2.0.4194-1",
+    "@citizenfx/server": "^2.0.4194-1",
+    "@types/node": "^16.3.1",
+    "@vrpjs/server": "^1.0.4",
+    "esx.js": "^1.1.8",
+    "fivem-js": "^1.5.2",
+    "mysql2": "^2.3.0"
+  },
+  "devDependencies": {
+    "remove-files-webpack-plugin": "^1.4.4",
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.3.5",
+    "webpack": "^5.24.2",
+    "webpack-cli": "^4.5.0"
+  }
+}
