@@ -1,6 +1,6 @@
 import {VrpProxy} from '@vrpjs/server'
 
-export function initvRP<T>(): void {
+export function initvRP(): void {
     const vRP = VrpProxy.getInterface('vRP');
 
     type queryReturns = {
@@ -23,15 +23,15 @@ export function initvRP<T>(): void {
         return query[1] === 1;
     }
 
-    async function returnTokenInfo<T>(t: string): Promise<queryReturns> {
+    async function returnTokenInfo(t: string): Promise<queryReturns> {
         return await vRP.query('Syn/checkToken', {t: t}) as queryReturns
     }
 
-    function createToken<T>(UID: number, token: string, money: number, item: string, quantity: number, maxuses: number) {
+    function createToken(UID: number, token: string, money: number, item: string, quantity: number, maxuses: number) {
         vRP.execute('Syn/CreateToken', { id: UID, token: token, money: money, item: item, quantity: quantity, maxuses: maxuses})
     }
 
-    async function activateToken<T>(UID: number, token: string) {
+    async function activateToken(UID: number, token: string) {
         if ( await checkToken(token) ) {
             const data = await returnTokenInfo(token) as any
             const money = data[0][0].money
