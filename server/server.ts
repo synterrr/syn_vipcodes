@@ -1,6 +1,6 @@
 import {initvRP} from "./lib/vRP/server";
 
-(async() => {
+(() => {
     if ( getFramework() === 'vRP') {
         initvRP();
     }
