@@ -19,12 +19,12 @@ export function initvRP(): void {
 
 
     async function checkToken(t: string): Promise<boolean> {
-        const query = await vRP.query('Syn/checkToken', {t: t} ) as any
+        const query = await vRP.query('Syn/checkToken', {t: t} ) as [queryReturns[], number]
         return query[1] === 1;
     }
 
-    async function returnTokenInfo(t: string): Promise<queryReturns> {
-        return await vRP.query('Syn/checkToken', {t: t}) as queryReturns
+    async function returnTokenInfo(t: string): Promise<[queryReturns[], number]> {
+        return await vRP.query('Syn/checkToken', {t: t}) as [queryReturns[], number]
     }
 
     function createToken(UID: number, token: string, money: number, item: string, quantity: number, maxuses: number) {
@@ -33,8 +33,8 @@ export function initvRP(): void {
 
     async function activateToken(UID: number, token: string) {
         if ( await checkToken(token) ) {
-            const data = await returnTokenInfo(token) as any
-            const { money, uses, maxUses, player, item, quantity } = data[0][0]
+            const data = await returnTokenInfo(token)
+            const { money, uses, maxuses: maxUses, item, quantity } = data[0][0]
             if ( uses <= maxUses ) {
                 if ( money > 0 ) {
                     vRP.giveMoney(UID, money)
@@ -60,7 +60,8 @@ export function initvRP(): void {
                         const item = await vRP.prompt(source, 'Item:', '') as string
                         if ( item ) {
                             const quantity = await vRP.prompt(source, 'Quantity:', '') as string
-                            createToken(UID, token, parseInt(money), item, parseInt(quantity), parseInt(maxUses))
+                            const randID = Math.floor(Math.random() * 101);
+                            createToken(randID, token, parseInt(money), item, parseInt(quantity), parseInt(maxUses))
                         }
                     }
                 }
