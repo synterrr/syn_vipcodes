@@ -34,12 +34,7 @@ export function initvRP(): void {
     async function activateToken(UID: number, token: string) {
         if ( await checkToken(token) ) {
             const data = await returnTokenInfo(token) as any
-            const money = data[0][0].money
-            const uses = data[0][0].uses
-            const maxUses = data[0][0].maxuses
-            const player = data[0][0].id
-            const item = data[0][0].item
-            const quantity = data[0][0].quantity
+            const { money, uses, maxUses, player, item, quantity } = data[0][0]
             if ( uses <= maxUses ) {
                 if ( money > 0 ) {
                     vRP.giveMoney(UID, money)
